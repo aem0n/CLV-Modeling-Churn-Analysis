@@ -56,7 +56,7 @@ The Random Forest model ranks which behaviors (e.g., how recently they shopped o
 
 ### 4. Business Action Matrix
 An interactive scatter plot that segments customers into four quadrants: **Top Priority**, **Loyal**, **Low Value Churner**, and **Loyal Low Value**.
-/business_action_matrix.html
+https://aem0n.github.io/CLV-Modeling-Churn-Analysis/business_action_matrix.html
 
 
 ---
