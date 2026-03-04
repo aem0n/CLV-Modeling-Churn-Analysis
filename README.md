@@ -3,6 +3,34 @@ Predictive CLV and Churn pipeline using BG/NBD, Gamma-Gamma, and Random Forest. 
 # Predictive Customer Analytics: RFM, CLV, and Churn Pipeline
 
 This repository implements an end-to-end data science pipeline for e-commerce customer behavior analysis. The project moves from descriptive segmentation to predictive modeling, focusing on customer retention and future value estimation using the Online Retail II dataset.
+# Predictive Customer Analytics: RFM, CLV, and Churn Pipeline
+
+This repository features an end-to-end data science pipeline designed to transform raw e-commerce transaction data into actionable business intelligence. The project moves beyond descriptive statistics to predictive modeling, focusing on customer retention, future value estimation, and risk management using the **Online Retail II** dataset.
+
+---
+
+## Core Analytical Modules
+
+The pipeline performs four critical functions to provide a 360-degree view of customer health:
+
+1.  **Customer Segmentation (RFM):** Identifying behavioral clusters using Recency, Frequency, and Monetary metrics via K-Means clustering.
+2.  **Predictive CLV:** Forecasting 6-month Customer Lifetime Value (CLV) using probabilistic **BG/NBD** and **Gamma-Gamma** models.
+3.  **Cohort Analysis:** Measuring customer "stickiness" through monthly retention heatmaps.
+4.  **Leak-Free Churn Prediction:** A Random Forest classifier trained on a simulated observation window to predict future customer departure without data leakage.
+
+
+
+---
+
+## Getting Started: Installation & Execution
+
+To ensure the script runs correctly, follow these steps to set up your local environment and data directory.
+
+### 1. Repository Setup
+Clone the repository and navigate to the project folder:
+```bash
+git clone [https://github.com/aem0n/CLV-Modeling-Churn-Analysis.git](https://github.com/aem0n/CLV-Modeling-Churn-Analysis.git)
+cd CLV-Modeling-Churn-Analysis
 
 ## Core Analytical Modules
 
