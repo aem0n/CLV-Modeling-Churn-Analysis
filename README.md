@@ -1,79 +1,72 @@
-# CLV-Modeling-Churn-Analysis
-Predictive CLV and Churn pipeline using BG/NBD, Gamma-Gamma, and Random Forest. Features advanced cohort filtering and return-rate signal preservation to ensure statistical validity.
-# Predictive Customer Analytics: RFM, CLV, and Churn Pipeline
+# Customer Analytics: Segmentation, CLV, and Churn Prediction
 
-This repository implements an end-to-end data science pipeline for e-commerce customer behavior analysis. The project moves from descriptive segmentation to predictive modeling, focusing on customer retention and future value estimation using the Online Retail II dataset.
-# Predictive Customer Analytics: RFM, CLV, and Churn Pipeline
+This repository provides an end-to-end customer analytics pipeline. It processes transaction data to perform RFM segmentation, predicts future Customer Lifetime Value (CLV), analyzes retention cohorts, and uses machine learning to identify customers at risk of churn.
 
-This repository features an end-to-end data science pipeline designed to transform raw e-commerce transaction data into actionable business intelligence. The project moves beyond descriptive statistics to predictive modeling, focusing on customer retention, future value estimation, and risk management using the **Online Retail II** dataset.
+## Project Overview
 
----
+The analysis follows a structured five-step workflow:
 
-## Core Analytical Modules
-
-The pipeline performs four critical functions to provide a 360-degree view of customer health:
-
-1.  **Customer Segmentation (RFM):** Identifying behavioral clusters using Recency, Frequency, and Monetary metrics via K-Means clustering.
-2.  **Predictive CLV:** Forecasting 6-month Customer Lifetime Value (CLV) using probabilistic **BG/NBD** and **Gamma-Gamma** models.
-3.  **Cohort Analysis:** Measuring customer "stickiness" through monthly retention heatmaps.
-4.  **Leak-Free Churn Prediction:** A Random Forest classifier trained on a simulated observation window to predict future customer departure without data leakage.
-
-
+1.  **Data Preprocessing:** Cleaning of cancelled orders, handling missing values, and applying outlier capping (1st and 99th percentiles) to ensure statistical stability.
+2.  **RFM Segmentation:** Using K-Means clustering to group customers by Recency, Frequency, and Monetary metrics.
+3.  **CLV Forecasting:** Utilizing BG/NBD and Gamma-Gamma probabilistic models to estimate the expected number of transactions and average profit per customer over a 6-month horizon.
+4.  **Cohort Analysis:** Generating monthly retention heatmaps with a maturity filter to evaluate long-term loyalty trends.
+5.  **Predictive Churn Modeling:** A leak-free Random Forest classifier that calculates the churn probability for each customer using behavior-based features (Return Rate, Avg Order Frequency, etc.).
 
 ---
 
-## Getting Started: Installation & Execution
 
-To ensure the script runs correctly, follow these steps to set up your local environment and data directory.
 
-### 1. Repository Setup
-Clone the repository and navigate to the project folder:
+## Dataset
+
+> [!IMPORTANT]  
+> **Manual Data Setup Required:** Due to file size limitations, the dataset is **not** included in this repository. You must download and place it manually to run the analysis.
+
+1. **Download:** Get the "Online Retail II" dataset from the [UCI Machine Learning Repository](https://archive.ics.uci.edu/dataset/502/online+retail+ii).
+2. **Rename:** Ensure the downloaded file is named exactly **`online_retail_II.xlsx`**.
+3. **Placement:** Place the file in the root directory of this project (the same folder as the script).
+
+
+---
+
+## Technical Stack
+
+* **Language:** Python 3.8+
+* **Data Analysis:** `pandas`, `numpy`
+* **Modeling:** `scikit-learn` (K-Means, Random Forest), `lifetimes` (BG/NBD, Gamma-Gamma)
+* **Visualization:** `matplotlib`, `seaborn`, `plotly`
+
+---
+
+## Visual Outputs & Insights
+
+### 1. K-Means Optimization
+The optimal number of clusters is determined through a side-by-side comparison of the Elbow Method (WCSS) and Silhouette Scores.
+
+
+
+### 2. Cohort Retention Heatmap
+This matrix identifies when customer drop-offs occur. A maturity filter is applied to exclude incomplete data from recent months.
+
+
+
+### 3. Churn Prediction Feature Importance
+The Random Forest model ranks which behaviors (e.g., how recently they shopped or their return rate) are the strongest predictors of whether a customer will stop buying.
+
+
+
+### 4. Business Action Matrix
+An interactive scatter plot that segments customers into four quadrants: **Top Priority**, **Loyal**, **Low Value Churner**, and **Loyal Low Value**.
+
+
+
+---
+
+## Setup and Usage
+
+### Installation
+Install the necessary dependencies using terminal:
 ```bash
-git clone [https://github.com/aem0n/CLV-Modeling-Churn-Analysis.git](https://github.com/aem0n/CLV-Modeling-Churn-Analysis.git)
-cd CLV-Modeling-Churn-Analysis
-
-## Core Analytical Modules
-
-### 1. Customer Segmentation (RFM)
-Utilizes Recency, Frequency, and Monetary metrics to categorize the customer base. 
-* **Methodology:** K-Means clustering with optimal K selection via Silhouette and Elbow analysis.
-* **Preprocessing:** Log-transformation and standard scaling to handle heavy-tailed distributions.
-
-
-
-### 2. Predictive Customer Lifetime Value (CLV)
-A probabilistic approach to determine the financial value of each customer over the next 6 months.
-* **Models:** BetaGeoFitter (BG/NBD) for transaction frequency and GammaGammaFitter for monetary value.
-* **Logic:** Differentiates between "age" (time since first purchase) and "recency" to predict future engagement.
-
-
-
-### 3. Cohort Retention Analysis
-A time-based analysis to track how different groups of customers (cohorts) stay active over several months.
-* **Focus:** Visualizes the "stickiness" of the product through a mature cohort heatmap, filtering out incomplete recent data to avoid bias.
-
-### 4. Leak-Free Churn Prediction
-A machine learning approach to identify customers at risk of leaving.
-* **Prevention of Data Leakage:** Features are engineered within an "observation window" and validated against a "performance window."
-* **Algorithm:** Random Forest Classifier with optimized depth to prevent overfitting.
-* **Key Features:** Incorporates return rates and average order frequency as primary churn signals.
-
-
-
-## Business Action Matrix
-
-The model outputs a strategic matrix to guide marketing interventions based on Churn Probability and Monetary Value:
-
-| Segment | Risk | Value | Recommended Action |
-| :--- | :--- | :--- | :--- |
-| **Top Priority** | High | High | Immediate retention campaigns and high-touch support. |
-| **Loyal Customers** | Low | High | Inclusion in VIP programs and early access to new products. |
-| **Low Value Churners** | High | Low | Automated re-engagement or passive monitoring. |
-| **Loyal Low Value** | Low | Low | Cross-selling and up-selling to increase basket size. |
-
-## Technical Implementation
-
-### Prerequisites
-The script requires Python 3.8+ and the following libraries:
+pip install -r requirements.txt
+Install the necessary dependencies using terminal:
 ```bash
-pip install pandas numpy matplotlib seaborn plotly scikit-learn lifetimes openpyxl
+pip install -r requirements.txt
